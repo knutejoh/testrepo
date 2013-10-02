@@ -4,6 +4,13 @@
  */
 package org.knuterik.resttest;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -11,12 +18,20 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Abstract
  */
 @XmlRootElement
-public class MyRestClass {
+@Entity
+@Table(name="RESTTESTCLASS")
+public class MyRestClass implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @NotNull
     private String name;
+    @NotNull
     private int age;
+    @NotNull
     private String address;
-    
+
     public String getName() {
         return name;
     }
@@ -41,4 +56,11 @@ public class MyRestClass {
         this.address = address;
     }
     
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
