@@ -1,0 +1,35 @@
+/* 
+    Document   : app
+    Created on : Oct 5, 2013, 5:06:36 PM
+    Author     : knut-erik.johnsen
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.lotto {
+    color: #FFFFFF;
+    font-family: Nunito;
+    font-weight: bold;
+    border: 1px solid; 
+    margin: 3px 3px;
+    width:40px;
+    height:40px;
+    line-height: 40px;
+    text-align: center;
+    position: relative;
+    border-radius: 20px;
+    float: left;
+}
+
+.winner {
+    background: #ff0000;
+    
+}
+.addition {
+    background: #3276b1;
+    
+}
