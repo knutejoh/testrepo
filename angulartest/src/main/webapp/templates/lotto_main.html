@@ -1,0 +1,29 @@
+<div class="jumbotron">
+    <div class="row" >
+        <div class="col-sm-2 col-sm-offset-1" style="line-height: 100px;">
+            <img src="images/lotto.png" alt="Lotto" class="img-rounded"/>
+        </div>
+        <div class="col-sm-4">
+            <h1 style="line-height: 100px; margin: 0px;">Lotto for the lazy</h1>
+        </div>
+        <div class="col-sm-4" style="line-height: 100px;">
+            Appen for deg som er lei av å sjekke lottotallene selv...
+        </div>
+     </div>
+</div>
+<div class="row">
+    
+    <div class="col-sm-4 col-sm-offset-4">
+        <lottomenu></lottomenu>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h2>Lottotall</h2>
+        <h3 ng-show="userInfo.isLoggedIn">Hi there {{userInfo.data.username}}</h3>
+        <h3 ng-hide="userInfo.isLoggedIn">Hi there anonymous</h3>
+
+        <p>Lotto er et artig spill for de som liker slikt :)</p>
+    </div>
+</div>
+

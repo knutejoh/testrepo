@@ -33,3 +33,14 @@ root {
     background: #3276b1;
     
 }
+
+.loginIframe {
+    height: 50px;
+    width : 400px;
+    border: 0px;
+    overflow: hidden;
+}
+
+body {
+    padding-top: 50px;
+}
