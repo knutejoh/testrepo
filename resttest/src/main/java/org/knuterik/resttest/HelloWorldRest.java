@@ -4,6 +4,7 @@
  */
 package org.knuterik.resttest;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -14,6 +15,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -37,7 +39,21 @@ public class HelloWorldRest {
     
     @GET
     @Produces({MediaType.APPLICATION_JSON + ";charset=UTF-8"})
-    public MyRestClass getJSON() {
+    public MyRestClass getJSON(@Context SecurityContext  req) {
+        
+        if (req != null) {
+            Principal user = req.getUserPrincipal();
+            if (user != null) {
+                System.out.println("Vi har bruker!! " + req.getUserPrincipal().getName());
+            } else {
+                System.out.println("Vi har anonym bruker... :(");
+            }
+            
+            
+        } else {
+            System.out.println("Vi har IKKE req!!");
+        }
+        
         for (MyRestClass boss : createBosses()) {
             em.persist(boss);
         }

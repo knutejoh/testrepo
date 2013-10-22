@@ -38,6 +38,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(org.knuterik.resttest.HelloWorldRest.class);
+        resources.add(org.knuterik.resttest.LottoRetriever.class);
     }
 
 }
