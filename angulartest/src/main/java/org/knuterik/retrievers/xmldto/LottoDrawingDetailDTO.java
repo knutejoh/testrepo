@@ -4,10 +4,11 @@
  */
 package org.knuterik.retrievers.xmldto;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.knuterik.retrievers.xmldto.converter.NorskTippingDateConverter;
 
 /**
  *
@@ -17,8 +18,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class LottoDrawingDetailDTO {
     
     private Long drawID;
-    private String drawDate;
-    private Date drawDateDate;
+    @XmlJavaTypeAdapter(NorskTippingDateConverter.class)
+    private Date drawDate;
     private List<Integer> mainTable;
     private List<Integer> addTable;
     private List<Long> prizeTable;
@@ -45,27 +46,13 @@ public class LottoDrawingDetailDTO {
         this.drawID = drawID;
     }
 
-    public String getDrawDate() {
+    public Date getDrawDate() {
         return drawDate;
     }
     
-    
-    
-    public void setDrawDate(String drawDateString) {
-        this.drawDate = drawDateString;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy,MM,dd,HH,mm,ss");
-        try  {
-            this.drawDateDate = sdf.parse(drawDateString);
-        } catch (Exception e) {
-            
-        }
+    public void setDrawDate(Date drawDate) {
+        this.drawDate = drawDate;
     }
-
-    public Date getDrawDateDate() {
-        return drawDateDate;
-    }
-
-    
     
     public List<Integer> getMainTable() {
         return mainTable;
@@ -128,7 +115,7 @@ public class LottoDrawingDetailDTO {
 
     @Override
     public String toString() {
-        return "LottoDrawingDetailDTO{" + "drawID=" + drawID + ", drawDate=" + drawDateDate + ", mainTable=" + mainTable + ", addTable=" + addTable + ", prizeTable=" + prizeTable + ", prizeCaptionTable=" + prizeCaptionTable + ", turnOver=" + turnover + ", totalNumberOfWinners=" + totalNumberOfWinners + ", superlottoResult=" + superlottoResult + '}';
+        return "LottoDrawingDetailDTO{" + "drawID=" + drawID + ", drawDate=" + drawDate + ", mainTable=" + mainTable + ", addTable=" + addTable + ", prizeTable=" + prizeTable + ", prizeCaptionTable=" + prizeCaptionTable + ", turnOver=" + turnover + ", totalNumberOfWinners=" + totalNumberOfWinners + ", superlottoResult=" + superlottoResult + '}';
     }
     
     

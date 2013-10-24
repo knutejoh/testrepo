@@ -4,8 +4,9 @@
  */
 package org.knuterik.retrievers.xmldto;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.knuterik.retrievers.xmldto.converter.NorskTippingDateConverter;
 
 /**
  *
@@ -13,8 +14,8 @@ import java.util.Date;
  */
 public class SuperLottoDrawingDTO {
     private Long drawID;
-    private String drawDate;
-    private Date drawDateDate;
+    @XmlJavaTypeAdapter(NorskTippingDateConverter.class)
+    private Date drawDate;
     private Long numberOfWinners;
     private Long prizeAmount;        
     
@@ -28,23 +29,12 @@ public class SuperLottoDrawingDTO {
         this.drawID = drawID;
     }
 
-    public String getDrawDate() {
+    public Date getDrawDate() {
         return drawDate;
     }
 
-    public Date getDrawDateDate() {
-        return drawDateDate;
-    }
-    
-    public void setDrawDate(String drawDate) {
+    public void setDrawDate(Date drawDate) {
         this.drawDate = drawDate;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy,MM,dd,HH,mm,ss");
-        try  {
-            this.drawDateDate = sdf.parse(drawDate);
-        } catch (Exception e) {
-            
-        }
-        
     }
 
     public Long getNumberOfWinners() {
@@ -65,7 +55,7 @@ public class SuperLottoDrawingDTO {
 
     @Override
     public String toString() {
-        return "SuperLottoDrawingDTO{" + "drawID=" + drawID + ", drawDate=" + drawDate + ", drawDateDate=" + drawDateDate + ", numberOfWinners=" + numberOfWinners + ", prizeAmount=" + prizeAmount + '}';
+        return "SuperLottoDrawingDTO{" + "drawID=" + drawID + ", drawDate=" + drawDate + ", drawDateDate=" + drawDate + ", numberOfWinners=" + numberOfWinners + ", prizeAmount=" + prizeAmount + '}';
     }
     
     

@@ -15,14 +15,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class LottoDrawListDTO {
 
-    List<LottoItemDTO> items = new ArrayList<LottoItemDTO>();
+    List<LottoItemDTO> items = new ArrayList<>();
 
     public List<LottoItemDTO> getItems() {
         return items;
     }
 
     public void setItems(List<LottoItemDTO> items) {
-        System.out.println("Trying to add items");
         this.items = items;
     }
 }

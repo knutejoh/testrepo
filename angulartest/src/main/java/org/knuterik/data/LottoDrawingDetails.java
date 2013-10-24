@@ -85,23 +85,15 @@ public class LottoDrawingDetails implements Serializable {
         
         LottoDrawingDetails details = new LottoDrawingDetails();
         details.setAddTable(dto.getAddTable());
-        details.setDrawDate(new DateTime(dto.getDrawDateDate()));
+        details.setDrawDate(new DateTime(dto.getDrawDate()));
         details.setId(dto.getDrawID());
         details.setMainTable(dto.getMainTable());
         details.setPrizeCaptionTable(dto.getPrizeCaptionTable());
         details.setPrizeTable(dto.getPrizeTable());
         details.setTotalNumberOfWinners(dto.getTotalNumberOfWinners());
         details.setTurnover(dto.getTurnover());
-        
-        
         return details;
     }
-    
-    
-    
-    
-    
-    
     
     public Long getId() {
         return id;
