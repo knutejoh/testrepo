@@ -27,19 +27,29 @@ controllers.controller('PhoneListCtrl', function($scope) {
 
 controllers.controller('LottoController', function($scope, DrawListService, UserService, $location) {
     $scope.lotto = {};
-
+    $scope.lotto.currentdraw = {};
+    $scope.draws = [];
+    
     $scope.getDraws = function() {
-        DrawListService.get(function(lottoResult) {
+        DrawListService.getAllDraws(function(draws) {
 //            console.log(lottoResult);
-            drawlist.decompress(lottoResult.items);
-
-            $scope.lotto.test = drawlist.drawIDTable;
+            $scope.draws = draws;
         });
     };
     
     $scope.retrieveLottoDrawings = function() {
         DrawListService.updateDrawList(function(status) {
             console.log(status);
+        }, function(status) {
+            console.log(status);
+        });
+    };
+
+    $scope.getDrawDetails = function(ID) {
+        DrawListService.getDrawDetails({methodname:ID}, function(status) {
+            
+            console.log(status);
+            $scope.lotto.currentdraw = status;
         }, function(status) {
             console.log(status);
         });

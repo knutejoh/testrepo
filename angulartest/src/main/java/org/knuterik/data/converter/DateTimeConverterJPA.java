@@ -15,7 +15,7 @@ import org.joda.time.DateTime;
  *
  * @author knut-erik.johnsen
  */
-public class DateTimeConverter implements Converter {
+public class DateTimeConverterJPA implements Converter {
 
     private static final long serialVersionUID = 1L;
 

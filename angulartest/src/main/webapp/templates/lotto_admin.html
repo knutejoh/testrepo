@@ -11,6 +11,26 @@
     <div class="col-md-12">
         <h1>Admin pages</h1>
         <button type="button" ng-click="retrieveLottoDrawings()" class="btn btn-success "> Oppdater trekninger </button>
+        <button type="button" ng-click="getDraws()" class="btn btn-success "> Vis trekninger </button>
+    </div>
+    
+    <div class="col-md-2 col-md-offset-4">
+        <h4>Tilgjengelige trekninger</h4>
+        <ul>
+            <li ng-repeat="drawing in draws">
+                <label>[{{drawing.id}}] Trekningdato {{drawing.drawDate}}</label>
+                <button type="button" ng-click="$parent.getDrawDetails(drawing.id)" class="btn btn-success">Hent trekning</button>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-2">
+        <div ng-hide="lotto.currentdraw == NULL">
+            <p>Har vi data mon tro? {{lotto.currentdraw.id}}</p> 
+            <ul>
+                <li ng-repeat="winner in lotto.currentdraw.mainTable">{{winner}}</li>
+            </ul>
+            
+        </div>
     </div>
 </div>
 

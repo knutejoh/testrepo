@@ -57,8 +57,6 @@ public class LottoService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDrawList() {
         
-        Status status = new Status();
-        
         return Response.ok(lottoRepository.getAllLottoDraws()).build();
     }
     
@@ -66,12 +64,13 @@ public class LottoService {
     @GET
     @Path("drawinfo/{drawid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDrawInfo(@PathParam("drawid") int drawId) {
+    public Response getDrawInfo(@PathParam("drawid") Long drawId) {
  
-        Status status = new Status();
- 
-        
-        return Response.ok().entity(status).build();
+        LottoDrawing drawing = lottoRepository.getLottoDraw(drawId);
+        if (drawing != null && drawing.getDrawDetails() != null) {
+            return Response.ok(drawing.getDrawDetails()).build();
+        }
+        return Response.ok().build();
     }
  
     @GET
@@ -90,10 +89,8 @@ public class LottoService {
         List<Long> ids = lottoRepository.getAllLottoIDs();
         
         for (LottoItemDTO item : drawList.getItems()) {
-            System.out.println("Antall trekninker: " + item.getDraws().size());
             for (LottoDrawDTO drawDTO : item.getDraws()) {
-                
-                LottoDrawing drawing = null;
+                LottoDrawing drawing;
                 
                 if (ids.contains(drawDTO.getDrawID())) {
                     drawing = lottoRepository.getLottoDraw(drawDTO.getDrawID());
@@ -112,6 +109,7 @@ public class LottoService {
                         System.out.println("Fant ikke matchende drawdetails: DrawID: " + drawing.getId() + " Details: " + (detailsDTO == null ? null : detailsDTO.getDrawID()));
                     }
                 }
+                break;
                 
             }
             

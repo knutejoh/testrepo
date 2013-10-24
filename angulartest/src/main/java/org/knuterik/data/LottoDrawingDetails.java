@@ -17,10 +17,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
 import org.joda.time.DateTime;
-import org.knuterik.data.converter.DateTimeConverter;
+import org.knuterik.data.converter.DateTimeConverterJAXB;
+import org.knuterik.data.converter.DateTimeConverterJPA;
 import org.knuterik.retrievers.xmldto.LottoDrawingDetailDTO;
 
 /**
@@ -73,8 +76,9 @@ public class LottoDrawingDetails implements Serializable {
     private Long totalNumberOfWinners;
 
     @Column(name = "drawDate")
-    @Converter(name = "dateTimeConverter", converterClass = DateTimeConverter.class)
+    @Converter(name = "dateTimeConverter", converterClass = DateTimeConverterJPA.class)
     @Convert("dateTimeConverter")
+    @XmlJavaTypeAdapter(DateTimeConverterJAXB.class)
     private DateTime drawDate = null;
     
     @OneToOne(mappedBy = "drawDetails")
@@ -103,6 +107,7 @@ public class LottoDrawingDetails implements Serializable {
         this.id = id;
     }
 
+    
     public DateTime getDrawDate() {
         return drawDate;
     }
@@ -159,6 +164,7 @@ public class LottoDrawingDetails implements Serializable {
         this.totalNumberOfWinners = totalNumberOfWinners;
     }
 
+    @XmlTransient
     public LottoDrawing getDrawing() {
         return drawing;
     }

@@ -17,10 +17,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
 import org.joda.time.DateTime;
-import org.knuterik.data.converter.DateTimeConverter;
+import org.knuterik.data.converter.DateTimeConverterJAXB;
+import org.knuterik.data.converter.DateTimeConverterJPA;
 
 /**
  *
@@ -45,8 +47,9 @@ public class LottoDrawing implements Serializable {
     private Long id;
 
     @Column(name = "drawDate")
-    @Converter(name = "dateTimeConverter", converterClass = DateTimeConverter.class)
+    @Converter(name = "dateTimeConverter", converterClass = DateTimeConverterJPA.class)
     @Convert("dateTimeConverter")
+    @XmlJavaTypeAdapter(DateTimeConverterJAXB.class)
     private DateTime drawDate = null;
     
     @OneToOne(optional = true, cascade = CascadeType.PERSIST)
@@ -61,7 +64,7 @@ public class LottoDrawing implements Serializable {
         this.id = id;
     }
 
-    @XmlTransient
+    
     public DateTime getDrawDate() {
         return drawDate;
     }
@@ -70,12 +73,7 @@ public class LottoDrawing implements Serializable {
         this.drawDate = drawDate;
     }
     
-    @XmlAttribute(name = "drawDate")
-    public String getDrawDateAsString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        return sdf.format(drawDate.toDate());
-    }
-    
+    @XmlTransient
     public LottoDrawingDetails getDrawDetails() {
         return drawDetails;
     }

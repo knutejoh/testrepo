@@ -8,7 +8,9 @@ angular.module('restTestServices', ['ngResource']).
 angular.module('lottoServices', ['ngResource'])
     .factory('DrawListService', function($resource) {
         return $resource('resources/lotto/:area/:methodname', {}, {
-            updateDrawList: {method:'GET', params: {area:'admin', methodname: 'updatedrawlist'}}
+            updateDrawList: {method:'GET', params: {area:'admin', methodname: 'updatedrawlist'}},
+            getAllDraws: {method:'GET', params: {area:'drawlist', methodname: ''}, isArray:true},
+            getDrawDetails: {method:'GET', params: {area:'drawinfo'}}
         });
  });
  
