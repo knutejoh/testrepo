@@ -38,10 +38,8 @@ public class FeltDestroyerFinalStatic {
         modifiers &= ~Modifier.FINAL;
         
         modifiersFelt.setInt(klasseFelt, modifiers);
-        
-        FieldAccessor fa = reflection.newFieldAccessor(klasseFelt, false);
               
-        fa.set(null, "Økonomi og administrasjon...");
+        klasseFelt.set(uioKlasse, "Økonomi og administrasjon...");
         
         System.out.println("Klassen er " + uioKlasse.getKlasse());
     }
