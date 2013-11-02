@@ -30,6 +30,12 @@ controllers.controller('LottoController', function($scope, DrawListService, User
     $scope.lotto.currentdraw = {};
     $scope.draws = [];
     
+    $scope.showYear = function(year, $event) {
+        console.log('Changing to year..' + year);
+//        $event.stopPropagation();
+        
+    }
+    
     $scope.getDraws = function() {
         DrawListService.getAllDraws(function(draws) {
 //            console.log(lottoResult);

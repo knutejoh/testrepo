@@ -109,7 +109,7 @@ public class LottoService {
                         System.out.println("Fant ikke matchende drawdetails: DrawID: " + drawing.getId() + " Details: " + (detailsDTO == null ? null : detailsDTO.getDrawID()));
                     }
                 }
-                break;
+//                break;
                 
             }
             

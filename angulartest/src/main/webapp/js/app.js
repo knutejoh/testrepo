@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('helloworld', ['restTestServices', 'restTestControllers', 'lottoServices', 'UserServices', 'LottoDirectives', 'ui.bootstrap'])
+angular.module('helloworld', ['restTestServices', 'restTestControllers', 'lottoServices', 'UserServices', 'LottoDirectives'])
 
 
     .config(function($routeProvider) {
