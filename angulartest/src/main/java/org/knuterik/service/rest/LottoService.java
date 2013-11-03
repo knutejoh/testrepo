@@ -6,6 +6,7 @@ package org.knuterik.service.rest;
 
 
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -56,6 +57,26 @@ public class LottoService {
     @Path("drawlist")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDrawList() {
+        
+        return Response.ok(lottoRepository.getAllLottoDraws()).build();
+    }
+    
+    @GET
+    @Path("drawlistsmart")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getDrawListSmart() {
+        
+        List<LottoDrawing> drawings = lottoRepository.getAllLottoDraws();
+        Map<String, Map<String, List<String>>> ting = null;
+        
+        String year = null;
+        
+        
+        for (LottoDrawing drawing : drawings) {
+            
+        }
+        
+//        List<List<List<String>String>String> data = List<<<>>>();
         
         return Response.ok(lottoRepository.getAllLottoDraws()).build();
     }
