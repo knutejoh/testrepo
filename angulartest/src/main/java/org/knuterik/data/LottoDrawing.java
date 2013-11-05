@@ -5,7 +5,6 @@
 package org.knuterik.data;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +14,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.eclipse.persistence.annotations.Convert;
@@ -33,13 +31,14 @@ import org.knuterik.data.converter.DateTimeConverterJPA;
 @NamedQueries({
     @NamedQuery(name = "LottoDrawing.findByDate", query = LottoDrawing.findByDateQuery),
     @NamedQuery(name = "LottoDrawing.findAll", query = LottoDrawing.findAllQuery),
-    @NamedQuery(name = "LottoDrawing.findAllID", query = LottoDrawing.findAllIDQuery)
-    
+    @NamedQuery(name = "LottoDrawing.findAllID", query = LottoDrawing.findAllIDQuery),
+    @NamedQuery(name = "LottoDrawing.findAllSorted", query = LottoDrawing.findAllSortedQuery)
 })  
 public class LottoDrawing implements Serializable {
     
     protected static final String findByDateQuery = "SELECT c FROM LottoDrawing c WHERE c.drawDate = :drawDate";
     protected static final String findAllQuery = "SELECT c FROM LottoDrawing c";
+    protected static final String findAllSortedQuery = "SELECT c FROM LottoDrawing c ORDER BY c.drawDate DESC";
     protected static final String findAllIDQuery = "SELECT c.id FROM LottoDrawing c";
     
     private static final long serialVersionUID = 1L;

@@ -10,6 +10,7 @@ angular.module('lottoServices', ['ngResource'])
         return $resource('resources/lotto/:area/:methodname', {}, {
             updateDrawList: {method:'GET', params: {area:'admin', methodname: 'updatedrawlist'}},
             getAllDraws: {method:'GET', params: {area:'drawlist', methodname: ''}, isArray:true},
+            getAllDrawsSmart: {method:'GET', params: {area:'drawlistsmart', methodname: ''}, isArray:true},
             getDrawDetails: {method:'GET', params: {area:'drawinfo'}}
         });
  });

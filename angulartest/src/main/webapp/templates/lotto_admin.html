@@ -10,7 +10,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <button type="button" ng-click="getDrawsSmart()" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 Trekninger <span class="caret"></span>
             </button>
             <div class="container dropdown-menu" role="menu" style="width: 300px; padding: 0px;" >
@@ -18,12 +18,8 @@
                     <div class="col-md-6" style="margin: 0px; padding:0px; border: 0px; height: 200px; overflow: auto;" id="aarstallrow">
                         <div class="panel panel-success" style="margin: 0px;" >
                             <div class="panel-heading" >Årstall</div>
-                            <ul class="list-group">
-                                <li ng-click="showYear('2013', $event)"class="list-group-item">2013</li>
-                                <li class="list-group-item">2012</li>
-                                <li class="list-group-item">2011</li>
-                                <li class="list-group-item">2010</li>
-                                <li class="list-group-item">Osv</li>
+                            <ul ng-repeat="year in smartdraws.YEAR_TABLE" class="list-group">
+                                <li ng-click="showYear(year, $event)" ng-class="{testAvTing: year == smartdraws.currentYear}" class="list-group-item">{{year}}</li>
                             </ul>
                         </div>
                     </div>

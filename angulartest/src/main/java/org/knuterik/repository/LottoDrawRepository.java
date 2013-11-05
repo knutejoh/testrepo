@@ -48,6 +48,11 @@ public class LottoDrawRepository {
         return query.getResultList();
     }
     
+    public List<LottoDrawing> getAllLottoDrawsSorted() {
+        TypedQuery<LottoDrawing> query = em.createNamedQuery("LottoDrawing.findAllSorted", LottoDrawing.class);
+        return query.getResultList();
+    }
+    
     public LottoDrawing createLottoDraw(Long ID, DateTime dateOfDraw) {
         LottoDrawing lottoDraw = new LottoDrawing();
         lottoDraw.setId(ID);

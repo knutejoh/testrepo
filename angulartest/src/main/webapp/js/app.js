@@ -18,11 +18,11 @@ angular.module('helloworld', ['restTestServices', 'restTestControllers', 'lottoS
 
     })
 
-    .run(function($timeout, UserService) {
-        console.log('starting run');
-        $timeout(function() {
-            UserService.timeout();
-            console.log('Timer started');
-        }, 3000);
-    })
+//    .run(function($timeout, UserService) {
+//        console.log('starting run');
+//        $timeout(function() {
+//            UserService.timeout();
+//            console.log('Timer started');
+//        }, 3000);
+//    })
 ;

@@ -5,6 +5,8 @@
 package org.knuterik.service.rest;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.Stateless;
@@ -66,19 +68,34 @@ public class LottoService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDrawListSmart() {
         
-        List<LottoDrawing> drawings = lottoRepository.getAllLottoDraws();
-        Map<String, Map<String, List<String>>> ting = null;
-        
-        String year = null;
+        List<LottoDrawing> drawings = lottoRepository.getAllLottoDrawsSorted();
+        Map<String, Map<String, List<String>>> totalMap = new HashMap<>();
         
         
         for (LottoDrawing drawing : drawings) {
-            
+            if (drawing.getDrawDetails() != null) {
+                String year = "" + drawing.getDrawDate().getYear();
+                Map<String, List<String>> yearMap = totalMap.get(year);
+                if (yearMap == null) {
+                    yearMap = new HashMap<>();
+                }
+
+                String month = ""  + drawing.getDrawDate().getMonthOfYear();
+                List<String> maaned = yearMap.get(month);
+                if (maaned == null) {
+                    maaned = new ArrayList<>();
+                }
+
+                maaned.add("" + drawing.getDrawDate().getDayOfMonth());
+
+                yearMap.put(month, maaned);
+                totalMap.put(year, yearMap);
+            }
         }
         
 //        List<List<List<String>String>String> data = List<<<>>>();
         
-        return Response.ok(lottoRepository.getAllLottoDraws()).build();
+        return Response.ok(totalMap).build();
     }
     
 
