@@ -5,6 +5,7 @@
 package org.knuterik.service.rest;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -69,24 +70,29 @@ public class LottoService {
     public Response getDrawListSmart() {
         
         List<LottoDrawing> drawings = lottoRepository.getAllLottoDrawsSorted();
-        Map<String, Map<String, List<String>>> totalMap = new HashMap<>();
+        Map<String, Map<String, List<SmartDraw>>> totalMap = new HashMap<>();
         
         
         for (LottoDrawing drawing : drawings) {
             if (drawing.getDrawDetails() != null) {
                 String year = "" + drawing.getDrawDate().getYear();
-                Map<String, List<String>> yearMap = totalMap.get(year);
+                Map<String, List<SmartDraw>> yearMap = totalMap.get(year);
                 if (yearMap == null) {
                     yearMap = new HashMap<>();
                 }
 
                 String month = ""  + drawing.getDrawDate().getMonthOfYear();
-                List<String> maaned = yearMap.get(month);
+                List<SmartDraw> maaned = yearMap.get(month);
                 if (maaned == null) {
                     maaned = new ArrayList<>();
                 }
-
-                maaned.add("" + drawing.getDrawDate().getDayOfMonth());
+                
+                SmartDraw draw = new SmartDraw();
+                draw.drawID = drawing.getId();
+                draw.date = drawing.getDrawDate().getDayOfMonth() + "";
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                draw.fullDate = sdf.format(drawing.getDrawDate().toDate());
+                maaned.add(draw);
 
                 yearMap.put(month, maaned);
                 totalMap.put(year, yearMap);
@@ -96,6 +102,12 @@ public class LottoService {
 //        List<List<List<String>String>String> data = List<<<>>>();
         
         return Response.ok(totalMap).build();
+    }
+    
+    public class SmartDraw {
+        public Long drawID;
+        public String date;
+        public String fullDate;
     }
     
 
@@ -111,6 +123,33 @@ public class LottoService {
         return Response.ok().build();
     }
  
+    @GET
+    @Path("maptest")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response mapTest() {
+        
+        TestAvMap test = new TestAvMap();
+        
+        test.test.put("Desember", new TestAvMap2());
+        test.test.put("November", new TestAvMap2());
+        test.test.put("Januar", new TestAvMap2());
+        test.test.put("feburar", new TestAvMap2());
+        
+        TestAvMap2 test2 = new TestAvMap2();
+        test.test.put("Desember", test2);
+        test2.test.put("November", new DateTime());
+        
+        
+        return Response.ok().entity(test).build();
+    }
+            
+    public class TestAvMap {
+        public Map<String, TestAvMap2> test = new HashMap();
+    }
+    public class TestAvMap2 {
+        public Map<String, DateTime> test = new HashMap();
+    }
+    
     @GET
     @Path("admin/updatedrawlist")
     @Produces(MediaType.APPLICATION_JSON)

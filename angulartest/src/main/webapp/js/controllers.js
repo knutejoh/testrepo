@@ -34,7 +34,8 @@ controllers.controller('LottoController', function($scope, DrawListService, User
         DAY_TABLE: new Array("S&oslash;", "Ma", "Ti", "On", "To", "Fr", "L&oslash;"),
         YEAR_TABLE : new Array(),
         draws : [],
-        currentYear : "2013"
+        currentYear : "2013",
+        tuneddraws: []
     };
     
     $scope.showYear = function(year, $event) {
@@ -45,19 +46,25 @@ controllers.controller('LottoController', function($scope, DrawListService, User
     };
     
     $scope.getDrawsSmart = function() {
-        
+            DrawListService.getAllDrawsSmart(function(maps) {
+                $scope.smartdraws.tuneddraws = maps;
+                console.log($scope.smartdraws.tuneddraws);
+//                console.log(maps.test["Desember"]);
+            });
             DrawListService.getAllDraws(function(draws) {
                 for (var i = 0; i < draws.length; i++) {
                     var dateArgs = draws[i].drawDate.split("-");
                     if ($.inArray(dateArgs[0], $scope.smartdraws.YEAR_TABLE) === -1) {
                         $scope.smartdraws.YEAR_TABLE.push(dateArgs[0]);
                     }
+//                    $scope.smartdraws.tuneddraws[dateArgs[0]][dateArgs[1]].push(draws[i]);
                 }
                 $scope.smartdraws.YEAR_TABLE.sort();
                 $scope.smartdraws.YEAR_TABLE.reverse();
                 $scope.smartdraws.currentYear = $scope.smartdraws.YEAR_TABLE[0];
                 console.log($scope.smartdraws.YEAR_TABLE);
                 $scope.smartdraws.draws = draws;
+//                console.log(tuneddraws);
             });
         
         
