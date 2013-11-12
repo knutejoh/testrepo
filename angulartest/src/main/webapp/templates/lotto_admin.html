@@ -81,10 +81,28 @@
         </ul>
     </div>
     <div class="col-md-2">
-        <div ng-hide="lotto.currentdraw == NULL">
+        <div ng-hide="lotto.currentdraw == NULL | typeof $event !== 'undefined'">
             <p>Har vi data mon tro? {{lotto.currentdraw.id}}</p> 
-            <div ng-repeat="winner in lotto.currentdraw.mainTable" class="lotto winner">{{winner}}</div>
-            <div ng-repeat="add in lotto.currentdraw.addTable" class="lotto addition">{{add}}</div>
+            
+                <div ng-repeat="winner in lotto.currentdraw.mainTable" class="lotto winner">{{winner}}</div>
+                <div ng-repeat="add in lotto.currentdraw.addTable" class="lotto addition">{{add}}</div>
+                <br>
+            <p>Omsetning: {{lotto.currentdraw.turnover}}</p>
+            <p>Vinnere: {{lotto.currentdraw.totalNumberOfWinners}}</p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>Vinnerkombo</td>
+                        <td>Premie</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="caption in lotto.currentdraw.prizeCaptionTable">
+                        <td>{{caption}}</td>
+                        <td>{{lotto.currentdraw.prizeTable[$index]}}</td>
+                    </tr>
+                </tbody>
+            </table>
                 
             
             

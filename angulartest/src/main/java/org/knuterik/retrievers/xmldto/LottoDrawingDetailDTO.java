@@ -22,7 +22,7 @@ public class LottoDrawingDetailDTO {
     private Date drawDate;
     private List<Integer> mainTable;
     private List<Integer> addTable;
-    private List<Long> prizeTable;
+    private List<String> prizeTable;
     private List<String> prizeCaptionTable;
     private Long turnover;
     private Long totalNumberOfWinners;
@@ -70,11 +70,11 @@ public class LottoDrawingDetailDTO {
         this.addTable = addTable;
     }
 
-    public List<Long> getPrizeTable() {
+    public List<String> getPrizeTable() {
         return prizeTable;
     }
 
-    public void setPrizeTable(List<Long> prizeTable) {
+    public void setPrizeTable(List<String> prizeTable) {
         this.prizeTable = prizeTable;
     }
 

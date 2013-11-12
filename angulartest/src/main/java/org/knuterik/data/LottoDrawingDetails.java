@@ -62,7 +62,7 @@ public class LottoDrawingDetails implements Serializable {
             joinColumns = @JoinColumn(name = "drawdetails_id", referencedColumnName = "id"),
             uniqueConstraints = {@UniqueConstraint(columnNames={"drawdetails_id","prize"})})
     @Column(name = "prize")
-    private List<Long> prizeTable;
+    private List<String> prizeTable;
     
     @ElementCollection
     @OrderColumn(name = "pricacaptionorder")
@@ -132,11 +132,11 @@ public class LottoDrawingDetails implements Serializable {
         this.addTable = addTable;
     }
 
-    public List<Long> getPrizeTable() {
+    public List<String> getPrizeTable() {
         return prizeTable;
     }
 
-    public void setPrizeTable(List<Long> prizeTable) {
+    public void setPrizeTable(List<String> prizeTable) {
         this.prizeTable = prizeTable;
     }
 
