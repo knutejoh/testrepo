@@ -30,42 +30,49 @@ controllers.controller('LottoController', function($scope, DrawListService, User
     $scope.lotto.currentdraw = {};
     $scope.draws = [];
     $scope.smartdraws = {
-        MONTH_TABLE: new Array("Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"),
-        DAY_TABLE: new Array("S&oslash;", "Ma", "Ti", "On", "To", "Fr", "L&oslash;"),
+        MONTH_TABLE: new Array("", "Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"),
+        DAY_TABLE: new Array("", "Man", "Tir", "Ons", "Tor", "Fre", "Lør", "Søn"),
         YEAR_TABLE : new Array(),
         draws : [],
-        currentYear : "2013",
-        tuneddraws: []
+        currentYear : 2013,
+        tuneddraws: [],
+        currentYearObj : {}
     };
     
     $scope.showYear = function(year, $event) {
         console.log('Changing to year..' + year);
         $scope.smartdraws.currentYear = year;
-        $event.stopPropagation();
+        $scope.smartdraws.currentYearObj = $.grep($scope.smartdraws.tuneddraws, function(e){ return e.year === year; })[0];
+        console.log($scope.smartdraws.currentYearObj);
+        if (typeof $event !== 'undefined') {
+            $event.stopPropagation();
+        }
+        
         
     };
     
     $scope.getDrawsSmart = function() {
             DrawListService.getAllDrawsSmart(function(maps) {
                 $scope.smartdraws.tuneddraws = maps;
-                console.log($scope.smartdraws.tuneddraws);
+                
+                $scope.showYear(2013);
 //                console.log(maps.test["Desember"]);
             });
-            DrawListService.getAllDraws(function(draws) {
-                for (var i = 0; i < draws.length; i++) {
-                    var dateArgs = draws[i].drawDate.split("-");
-                    if ($.inArray(dateArgs[0], $scope.smartdraws.YEAR_TABLE) === -1) {
-                        $scope.smartdraws.YEAR_TABLE.push(dateArgs[0]);
-                    }
-//                    $scope.smartdraws.tuneddraws[dateArgs[0]][dateArgs[1]].push(draws[i]);
-                }
-                $scope.smartdraws.YEAR_TABLE.sort();
-                $scope.smartdraws.YEAR_TABLE.reverse();
-                $scope.smartdraws.currentYear = $scope.smartdraws.YEAR_TABLE[0];
-                console.log($scope.smartdraws.YEAR_TABLE);
-                $scope.smartdraws.draws = draws;
-//                console.log(tuneddraws);
-            });
+//            DrawListService.getAllDraws(function(draws) {
+//                for (var i = 0; i < draws.length; i++) {
+//                    var dateArgs = draws[i].drawDate.split("-");
+//                    if ($.inArray(dateArgs[0], $scope.smartdraws.YEAR_TABLE) === -1) {
+//                        $scope.smartdraws.YEAR_TABLE.push(dateArgs[0]);
+//                    }
+////                    $scope.smartdraws.tuneddraws[dateArgs[0]][dateArgs[1]].push(draws[i]);
+//                }
+//                $scope.smartdraws.YEAR_TABLE.sort();
+//                $scope.smartdraws.YEAR_TABLE.reverse();
+//                $scope.smartdraws.currentYear = $scope.smartdraws.YEAR_TABLE[0];
+////                console.log($scope.smartdraws.YEAR_TABLE);
+//                $scope.smartdraws.draws = draws;
+////                console.log(tuneddraws);
+//            });
         
         
     };

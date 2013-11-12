@@ -70,32 +70,36 @@ public class LottoService {
     public Response getDrawListSmart() {
         
         List<LottoDrawing> drawings = lottoRepository.getAllLottoDrawsSorted();
-        Map<String, Map<String, List<SmartDraw>>> totalMap = new HashMap<>();
+        Map<String, SmartYear> totalMap = new HashMap<>();
         
         
         for (LottoDrawing drawing : drawings) {
             if (drawing.getDrawDetails() != null) {
-                String year = "" + drawing.getDrawDate().getYear();
-                Map<String, List<SmartDraw>> yearMap = totalMap.get(year);
-                if (yearMap == null) {
-                    yearMap = new HashMap<>();
+                int year = drawing.getDrawDate().getYear();
+                SmartYear smartYear = totalMap.get("" + year);
+                if (smartYear == null) {
+                    smartYear = new SmartYear();
+                    smartYear.year = year;
                 }
 
-                String month = ""  + drawing.getDrawDate().getMonthOfYear();
-                List<SmartDraw> maaned = yearMap.get(month);
-                if (maaned == null) {
-                    maaned = new ArrayList<>();
+                int month = drawing.getDrawDate().getMonthOfYear();
+                SmartMonth smartMonth = smartYear.months.get("" + month);
+                if (smartMonth == null) {
+                    smartMonth = new SmartMonth();
+                    smartMonth.month = month;
                 }
                 
-                SmartDraw draw = new SmartDraw();
-                draw.drawID = drawing.getId();
-                draw.date = drawing.getDrawDate().getDayOfMonth() + "";
+                SmartDraw smartDraw = new SmartDraw();
+                smartDraw.id = drawing.getId();
+                smartDraw.d = drawing.getDrawDate().getDayOfMonth();
+                smartDraw.dow = drawing.getDrawDate().getDayOfWeek();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                draw.fullDate = sdf.format(drawing.getDrawDate().toDate());
-                maaned.add(draw);
+                smartDraw.fd = sdf.format(drawing.getDrawDate().toDate());
+                
+                smartMonth.draws.add(smartDraw);
 
-                yearMap.put(month, maaned);
-                totalMap.put(year, yearMap);
+                smartYear.months.put(month + "", smartMonth);
+                totalMap.put(year + "", smartYear);
             }
         }
         
@@ -104,10 +108,25 @@ public class LottoService {
         return Response.ok(totalMap).build();
     }
     
+    public class SmartYear {
+        public int year;
+        Map<String, SmartMonth> months = new HashMap<>();
+        
+        public List<SmartMonth> getMonths() {
+            return new ArrayList<>(months.values());
+        }
+    }
+    
+    public class SmartMonth {
+        public int month;
+        public List<SmartDraw> draws = new ArrayList<>();
+    }
+    
     public class SmartDraw {
-        public Long drawID;
-        public String date;
-        public String fullDate;
+        public Long id;
+        public int d;
+        public String fd;
+        public int dow;
     }
     
 
@@ -192,7 +211,7 @@ public class LottoService {
             
         }
         
-//        json.setData(newUser); //just return the date we received
+//        json.setData(newUser); //just return the d we received
         
         
         return Response.ok().entity(status).build();

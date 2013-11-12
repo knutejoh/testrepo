@@ -18,20 +18,20 @@
                     <div class="col-md-6" style="margin: 0px; padding:0px; border: 0px; height: 200px; overflow: auto;" id="aarstallrow">
                         <div class="panel panel-success" style="margin: 0px;" >
                             <div class="panel-heading" >Årstall</div>
-                            <ul ng-repeat="(year, data) in smartdraws.tuneddraws" class="list-group">
-                                <li ng-click="showYear(year, $event)" ng-class="{testAvTing: year == smartdraws.currentYear}" class="list-group-item">{{year}}</li>
+                            <ul ng-repeat="year in smartdraws.tuneddraws | orderBy:'year':true" class="list-group">
+                                <li ng-click="showYear(year.year, $event)" ng-class="{testAvTing: year.year == smartdraws.currentYear}" class="list-group-item">{{year.year}}</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-6" style="padding:0px; border: 0px; margin: 0px; height: 200px; overflow: auto;">
-                        <div ng-repeat="(month, drawings) in smartdraws.tuneddraws[smartdraws.currentYear] | orderBy:month">
-                            <div class="panel panel-default" style="margin: 0px;">
-                                <div class="panel-heading">{{smartdraws.MONTH_TABLE[month - 1]}}</div>
-                                <ul ng-repeat="draw in drawings | orderBy:draw" class="list-group">
-                                    <li class="list-group-item">{{draw.date}}</li>
+                        
+                            <div ng-repeat="month in smartdraws.currentYearObj.months | orderBy:'month':true" class="panel panel-default" style="margin: 0px;">
+                                <div class="panel-heading">{{smartdraws.MONTH_TABLE[month.month]}}</div>
+                                <ul class="list-group">
+                                    <li ng-repeat="draw in month.draws | orderBy:'d':true" ng-click="getDrawDetails(draw.id)" class="list-group-item">{{smartdraws.DAY_TABLE[draw.dow]}} {{draw.d}}</li>
                                 </ul>
                             </div>
-                        </div>
+                        
                         
                     </div>
                 </div>
@@ -76,16 +76,17 @@
         <ul>
             <li ng-repeat="drawing in draws">
                 <label>[{{drawing.id}}] Trekningdato {{drawing.drawDate}}</label>
-                <button type="button" ng-click="$parent.getDrawDetails(drawing.id)" class="btn btn-success">Hent trekning</button>
+                <button type="button" ng-click="getDrawDetails(drawing.id)" class="btn btn-success">Hent trekning</button>
             </li>
         </ul>
     </div>
     <div class="col-md-2">
         <div ng-hide="lotto.currentdraw == NULL">
             <p>Har vi data mon tro? {{lotto.currentdraw.id}}</p> 
-            <ul>
-                <li ng-repeat="winner in lotto.currentdraw.mainTable">{{winner}}</li>
-            </ul>
+            <div ng-repeat="winner in lotto.currentdraw.mainTable" class="lotto winner">{{winner}}</div>
+            <div ng-repeat="add in lotto.currentdraw.addTable" class="lotto addition">{{add}}</div>
+                
+            
             
         </div>
     </div>
