@@ -1,0 +1,66 @@
+/* 
+    Document   : app
+    Created on : Oct 5, 2013, 5:06:36 PM
+    Author     : knut-erik.johnsen
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.lotto {
+    color: #FFFFFF;
+    font-family: Nunito;
+    font-weight: bold;
+    border: 4px solid; 
+    border-color: #17d73d;
+    margin: 3px 3px;
+    width:44px;
+    height:44px;
+    line-height: 44px;
+    text-align: center;
+    position: relative;
+    border-radius: 22px;
+    /*float: left;*/
+}
+
+.winner {
+    background: #ff0000;
+    
+}
+.addition {
+    background: #3276b1;
+    
+}
+
+.loginIframe {
+    height: 50px;
+    width : 400px;
+    border: 0px;
+    overflow: hidden;
+}
+
+.testAvTing {
+    background-color: #269abc;
+}
+
+body {
+    padding-top: 50px;
+}
+
+.kos {
+    background-color: #00919c;
+    color:  #fff;
+}
+.kos a {
+    background-color: #00919c;
+    color:  #fff;
+}
+
+.nav-dropdown,
+.nav-dropdown a {
+    background-color:  #fff;
+    color:  #000;
+}
