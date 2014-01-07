@@ -1,0 +1,121 @@
+<!doctype html >
+<html ng-app="helloworld">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/app_plain.css"> 
+        <link rel="stylesheet" href="css/bootstrap.css"> 
+        
+
+        <title>Knudi Apps</title>
+
+    </head>
+    <body>
+        <header></header>
+        <nav class="navbar navbar-fixed-top" role="navigation">
+            <div class="kos container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class=" navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <span class="navbar-brand">Lotto for the lazy</span>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-info-sign"></span> Meny<b class="caret"></b></a>
+                            <ul class="nav-dropdown dropdown-menu">
+                                <li class="active"><a class="kos" href="#/lotto"><span class="glyphicon glyphicon-home"></span> Hjem</a></li>
+                                <li><a href="#/lotto/trekninger">Trekninger</a></li>
+                                <li role="presentation" class="divider"></li>
+                                <li  class="dropdown-header">Krever innlogging</li>
+                                <li><a href="#/lotto/kuponger">Kuponger</a></li>
+                                <li><a href="#/lotto/admin">Admin</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li><a href="#"><span class="glyphicon glyphicon-star"></span> Ansvarsfraskrivelse</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Om oss (eller meg)</a></li>
+                    </ul>
+                    
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#/login"><span class="glyphicon glyphicon-asterisk"></span> Login</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-info-sign"></span> Andre KnudiApps<b class="caret"></b></a>
+                            <ul class="nav-dropdown dropdown-menu">
+                                <li><a href="#/lotto/">Lotto</a></li>
+                                <li><a href="#/phones/">Phones</a></li>
+                                <li><a href="#/bosses/">Bosses</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="row">
+                
+                
+                <div class="col-md-4 col-md-offset-2">
+                    <div class="lotto winner">1</div>
+                    <div class="lotto winner">2</div>
+                    <div class="lotto winner">3</div>
+                    <div class="lotto winner">4</div>
+                    <div class="lotto winner">5</div>
+                    <div class="lotto winner">6</div>
+                    <div class="lotto winner">7</div>
+                    <div class="lotto addition">11</div>
+                    <div class="lotto addition">12</div>
+                    <div class="lotto addition">13</div>
+                    
+                </div>
+                
+                
+            </div>
+            
+            
+            
+            
+            
+        </div>
+        
+        
+
+
+        <footer class="navbar-default navbar-fixed-bottom">
+            <div class="container">
+                <div class="kos row">
+                    <div class="col-md-4">
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="nav nav-pills">
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Support 24x7</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4"></div>
+                    
+                </div>
+            </div>
+        </footer>
+        <script src="js/angular.js"></script>
+        <script src="js/angular-resource.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <!--<script src="js/ui-bootstrap-tpls.js"></script>-->
+        <script src="js/app.js"></script>
+        <script src="js/controllers.js"></script>
+        <script src="js/services.js"></script>
+        <script src="js/directives.js"></script>
+        <script src="js/lotto.js"></script>
+    </body>
+</html>

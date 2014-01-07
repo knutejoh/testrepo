@@ -8,7 +8,7 @@ angular.module('helloworld', ['restTestServices', 'restTestControllers', 'lottoS
             when('/', {controller:'WelcomeController', templateUrl:'templates/welcome.html'}).
             when('/bosses/', {controller:'RestController', templateUrl:'templates/sjefen.html'}).
             when('/lotto/', {controller:'LottoController', templateUrl:'templates/lotto_main.html'}).
-            when('/lotto/trekninger', {controller:'LottoController', templateUrl:'templates/lotto_main.html'}).
+            when('/lotto/trekninger', {controller:'LottoController', templateUrl:'templates/lotto_trekninger.html'}).
             when('/lotto/kupong', {controller:'LottoController', templateUrl:'templates/lotto_main.html'}).
             when('/lotto/minside', {controller:'LottoController', templateUrl:'templates/lotto_main.html'}).
             when('/lotto/admin', {controller:'LottoController', templateUrl:'templates/lotto_admin.html'}).
